@@ -12,7 +12,11 @@ class SharedPrefManager {
 
   readNoteList() async {
     final shared = await SharedPreferences.getInstance();
-    return json.decode(shared.getString('notes') ?? "");
+    try {
+      return json.decode(shared.getString('notes') ?? "");
+    } catch(e) {
+      return [];
+    }
   }
 
   clear() async {
